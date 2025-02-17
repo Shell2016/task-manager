@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: task-manager
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskmanager
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+  liquibase:
+    enabled: false
