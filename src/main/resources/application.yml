@@ -12,5 +12,3 @@ spring:
       hibernate:
         hbm2ddl:
           auto: validate
-  liquibase:
-    enabled: false
