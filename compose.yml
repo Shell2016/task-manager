@@ -13,14 +13,6 @@ services:
     volumes:
       - db-vol:/var/lib/postgresql/data
 
-#  taskmanager:
-#    container_name: taskmanager
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/taskmanager
-#    restart: unless-stopped
-#    depends_on:
-#      - postgres
-
 volumes:
   db-vol:
 

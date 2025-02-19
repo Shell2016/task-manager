@@ -8,8 +8,3 @@ logging:
   level:
     com.zaxxer.hikari.pool.HikariPool: debug
     org.springframework.orm.jpa.JpaTransactionManager: debug
-
-
-
-
-
