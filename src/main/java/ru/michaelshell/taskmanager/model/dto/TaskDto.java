@@ -3,8 +3,8 @@ package ru.michaelshell.taskmanager.model.dto;
 import lombok.Builder;
 
 @Builder
-public record TaskDto(long id,
+public record TaskDto(Long id,
                       String title,
                       String description,
-                      long userId) {
+                      Long userId) {
 }

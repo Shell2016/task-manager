@@ -12,3 +12,4 @@ spring:
       hibernate:
         hbm2ddl:
           auto: validate
+    open-in-view: false
