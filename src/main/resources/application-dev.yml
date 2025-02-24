@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+logging:
+  level:
+    com.zaxxer.hikari.pool.HikariPool: debug
+    org.springframework.orm.jpa.JpaTransactionManager: debug
