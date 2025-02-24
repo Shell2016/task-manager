@@ -6,5 +6,6 @@ import lombok.Builder;
 public record TaskDto(Long id,
                       String title,
                       String description,
-                      Long userId) {
+                      Long userId,
+                      TaskStatus status) {
 }
