@@ -8,8 +8,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class KafkaConfigData {
 
     private String bootstrapServers;
+    private String topic;
     private Integer numberOfPartitions;
     private Short replicationFactor;
+    private Short minInsyncReplicas;
     private Producer producer;
     private Consumer consumer;
 
@@ -18,8 +20,9 @@ public class KafkaConfigData {
         private String keySerializer;
         private String valueSerializer;
         private String acks;
-        private String retries;
         private String retryBackoffMs;
+        private String requestTimeoutMs;
+        private String deliveryTimeoutMs;
         private String batchSize;
         private String lingerMs;
     }

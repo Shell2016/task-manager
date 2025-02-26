@@ -1,10 +1,10 @@
 package ru.michaelshell.taskmanager.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.michaelshell.taskmanager.exception.ResourceNotFoundException;
+import ru.michaelshell.taskmanager.kafka.producer.KafkaProducer;
 import ru.michaelshell.taskmanager.mapper.TaskMapper;
 import ru.michaelshell.taskmanager.model.dto.CreateTaskRequest;
 import ru.michaelshell.taskmanager.model.dto.TaskDto;
@@ -22,7 +22,8 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
-    private final KafkaTemplate<String, TaskStatusUpdatedEvent> kafkaTemplate;
+    private final KafkaProducer kafkaProducer;
+
 
     @Transactional
     public TaskDto createTask(CreateTaskRequest createTaskRequest) {
@@ -49,12 +50,10 @@ public class TaskService {
         taskMapper.updateTask(task, updateTaskRequest);
 
         if (oldStatus != task.getStatus()) {
-            kafkaTemplate.send("task-status-updated-events-topic",
-                    id.toString(),
-                    TaskStatusUpdatedEvent.builder()
-                            .id(task.getId())
-                            .status(task.getStatus())
-                            .build());
+            kafkaProducer.send(TaskStatusUpdatedEvent.builder()
+                    .id(task.getId())
+                    .status(task.getStatus())
+                    .build());
         }
         return taskMapper.taskToTaskDto(task);
     }
