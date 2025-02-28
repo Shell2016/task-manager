@@ -15,22 +15,25 @@ spring:
     open-in-view: false
 
 kafka-config:
-  bootstrap-servers: localhost:9092
+  bootstrap-servers: localhost:9092,localhost:9093
   topic: task-status-updated-events-topic
   number-of-partitions: 3
   replication-factor: 3
   min-insync-replicas: 2
   producer:
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     acks: all
-    retry-backoff-ms: 1000
-    request-timeout-ms: 10000
-    delivery-timeout-ms: 12000
+    retry-backoff-ms: 500
+    request-timeout-ms: 30000
+    delivery-timeout-ms: 120000
     batch-size: 16384
     linger-ms: 10
   consumer:
-    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     group-id: task-status-updated-events
     trusted-packages: ru.michaelshell.taskmanager.model.event
+    heartbeat-timeout-ms: 3000
+    session-timeout-ms: 45000
+    max-poll-interval-ms: 300000
+    max-poll-records: 100
+    auto-offset-reset: latest
+    enable-auto-commit: false
+    use-type-info-headers: false
