@@ -1,11 +1,11 @@
-package ru.michaelshell.taskmanager.kafka.config;
+package ru.michaelshell.taskmanager.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = "kafka-config")
-public class KafkaConfigData {
+public class KafkaConfigProperties {
 
     private String bootstrapServers;
     private String topic;

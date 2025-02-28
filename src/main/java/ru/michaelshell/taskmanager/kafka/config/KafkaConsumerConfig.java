@@ -13,6 +13,7 @@ import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.util.backoff.ExponentialBackOff;
+import ru.michaelshell.taskmanager.config.KafkaConfigProperties;
 import ru.michaelshell.taskmanager.model.event.TaskStatusUpdatedEvent;
 
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KafkaConsumerConfig {
 
-    private final KafkaConfigData config;
+    private final KafkaConfigProperties config;
 
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {

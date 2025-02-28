@@ -11,6 +11,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+import ru.michaelshell.taskmanager.config.KafkaConfigProperties;
 import ru.michaelshell.taskmanager.model.event.TaskStatusUpdatedEvent;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KafkaProducerConfig {
 
-    private final KafkaConfigData config;
+    private final KafkaConfigProperties config;
 
     @Bean
     NewTopic newTopic() {

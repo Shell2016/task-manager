@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import ru.michaelshell.taskmanager.kafka.config.KafkaConfigData;
+import ru.michaelshell.taskmanager.config.KafkaConfigProperties;
 import ru.michaelshell.taskmanager.model.event.TaskStatusUpdatedEvent;
 
 @Slf4j
@@ -14,11 +14,11 @@ import ru.michaelshell.taskmanager.model.event.TaskStatusUpdatedEvent;
 public class KafkaProducer {
 
     private final KafkaTemplate<String, TaskStatusUpdatedEvent> kafkaTemplate;
-    private final KafkaConfigData kafkaConfigData;
+    private final KafkaConfigProperties config;
 
     public void send(TaskStatusUpdatedEvent event) {
         ProducerRecord<String, TaskStatusUpdatedEvent> producerRecord =
-                new ProducerRecord<>(kafkaConfigData.getTopic(), event.id().toString(), event);
+                new ProducerRecord<>(config.getTopic(), event.id().toString(), event);
 
         kafkaTemplate.send(producerRecord)
                 .whenComplete((result, e) -> {
