@@ -1,6 +1,8 @@
 package ru.michaelshell.taskmanager.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
+import ru.michaelshell.taskmanager.model.dto.TaskStatus;
 
 import java.util.Objects;
 
@@ -32,6 +35,9 @@ public class Task {
     private String description;
 
     private Long userId;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     @Override
     public final boolean equals(Object o) {

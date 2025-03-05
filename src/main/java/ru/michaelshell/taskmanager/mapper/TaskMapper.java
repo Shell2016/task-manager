@@ -13,6 +13,7 @@ import ru.michaelshell.taskmanager.model.entity.Task;
 public interface TaskMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", ignore = true)
     Task createTaskRequestToTask(CreateTaskRequest createTaskRequest);
 
     TaskDto taskToTaskDto(Task task);

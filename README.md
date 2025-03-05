@@ -1,9 +1,10 @@
 # Task-manager
 
-Для запуска приложения понадобится запущенный постгрес
-(можно воспользоваться compose.yml)
-
-Не стал добавлять OpenApi, чтобы не загромождать контроллер аннотациями.
+Для работы EmailNotificationService понадобятся следующие енвы:
+SPRING_MAIL_PASSWORD
+SPRING_MAIL_USERNAME (настроено для работы с Google Mail)
+SPRING_MAIL_RECIPIENT
+SPRING_MAIL_FROM
 
 Краткое описание API:
 
@@ -25,7 +26,8 @@ PUT /tasks/{id} — обновление задачи.
 ```json
 {
   "title": "newTitle",
-  "description": "newDesc"
+  "description": "newDesc",
+  "status": "IN_PROGRESS"
 }
 ```
 DELETE /tasks/{id} — удаление задачи.
