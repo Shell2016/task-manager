@@ -22,6 +22,7 @@ configurations {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -33,6 +34,7 @@ dependencies {
     implementation "org.mapstruct:mapstruct:${versions.mapstruct}"
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation "ru.michaelshell:logger-starter:${versions.logger}"
 
     compileOnly 'org.projectlombok:lombok'
 

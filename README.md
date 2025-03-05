@@ -1,9 +1,9 @@
 # Task-manager
 
 Для работы EmailNotificationService понадобятся следующие енвы:
-SPRING_MAIL_PASSWORD
-SPRING_MAIL_USERNAME (настроено для работы с Google Mail)
-SPRING_MAIL_RECIPIENT
+SPRING_MAIL_PASSWORD  
+SPRING_MAIL_USERNAME (настроено для работы с Google Mail)  
+SPRING_MAIL_RECIPIENT  
 SPRING_MAIL_FROM
 
 Краткое описание API:

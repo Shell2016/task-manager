@@ -51,3 +51,7 @@ kafka-config:
     auto-offset-reset: latest
     enable-auto-commit: false
     use-type-info-headers: false
+
+logging:
+  level:
+    ru.michaelshell.loggerstarter: debug
