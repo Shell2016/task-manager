@@ -48,7 +48,7 @@ public class TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " was not found!"));
         TaskStatus oldStatus = task.getStatus();
         taskMapper.updateTask(task, updateTaskRequest);
-
+        taskRepository.save(task);
         if (oldStatus != task.getStatus()) {
             kafkaProducer.send(TaskStatusUpdatedEvent.builder()
                     .id(task.getId())
