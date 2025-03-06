@@ -54,3 +54,6 @@ kafka-config:
 
 logger:
   level: debug
+logging:
+  level:
+    ru.michaelshell.loggerstarter: trace
