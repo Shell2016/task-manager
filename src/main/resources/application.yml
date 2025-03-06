@@ -52,6 +52,5 @@ kafka-config:
     enable-auto-commit: false
     use-type-info-headers: false
 
-logging:
-  level:
-    ru.michaelshell.loggerstarter: debug
+logger:
+  level: debug
