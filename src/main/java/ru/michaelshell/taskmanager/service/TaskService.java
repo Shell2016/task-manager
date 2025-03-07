@@ -24,10 +24,11 @@ public class TaskService {
     private final TaskMapper taskMapper;
     private final KafkaProducer kafkaProducer;
 
-
     @Transactional
     public TaskDto createTask(CreateTaskRequest createTaskRequest) {
-        return taskMapper.taskToTaskDto(taskRepository.save(taskMapper.createTaskRequestToTask(createTaskRequest)));
+        Task task = taskMapper.createTaskRequestToTask(createTaskRequest);
+        task.setStatus(TaskStatus.TODO);
+        return taskMapper.taskToTaskDto(taskRepository.save(task));
     }
 
     public List<TaskDto> getAllTasks() {
@@ -62,6 +63,4 @@ public class TaskService {
     public String deleteTask(Long id) {
         return taskRepository.deleteTaskById(id) == 1 ? "Task has been deleted." : "Task was not found.";
     }
-
-
 }

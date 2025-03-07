@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.michaelshell.taskmanager.aop.annotation.LogAfterReturning;
-import ru.michaelshell.taskmanager.aop.annotation.LogAfterThrowing;
-import ru.michaelshell.taskmanager.aop.annotation.LogBefore;
-import ru.michaelshell.taskmanager.aop.annotation.LogExecutionTime;
+import ru.michaelshell.loggerstarter.annotation.LogRequestAndResponse;
 import ru.michaelshell.taskmanager.model.dto.CreateTaskRequest;
 import ru.michaelshell.taskmanager.model.dto.TaskDto;
 import ru.michaelshell.taskmanager.model.dto.UpdateTaskRequest;
@@ -30,34 +27,31 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @LogAfterReturning
+    @LogRequestAndResponse
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TaskDto createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest) {
         return taskService.createTask(createTaskRequest);
     }
 
-    @LogExecutionTime
+    @LogRequestAndResponse
     @GetMapping
     public List<TaskDto> getTasks() {
         return taskService.getAllTasks();
     }
 
-    @LogExecutionTime
-    @LogAfterThrowing
+    @LogRequestAndResponse
     @GetMapping("/{id}")
     public TaskDto getTask(@PathVariable Long id) {
         return taskService.getTask(id);
     }
 
-    @LogBefore
-    @LogAfterReturning
+    @LogRequestAndResponse
     @PutMapping("/{id}")
     public TaskDto updateTask(@PathVariable Long id, @RequestBody @Valid UpdateTaskRequest updateTaskRequest) {
         return taskService.updateTask(id, updateTaskRequest);
     }
 
-    @LogBefore
     @DeleteMapping("/{id}")
     public String deleteTask(@PathVariable Long id) {
         return taskService.deleteTask(id);
