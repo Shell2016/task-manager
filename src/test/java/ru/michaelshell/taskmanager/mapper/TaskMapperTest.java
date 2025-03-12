@@ -9,18 +9,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.michaelshell.taskmanager.model.dto.TaskDto;
 import ru.michaelshell.taskmanager.model.entity.Task;
 
-import static ru.michaelshell.taskmanager.TestModelFactory.TASK_DESCRIPTION;
-import static ru.michaelshell.taskmanager.TestModelFactory.TASK_ID;
-import static ru.michaelshell.taskmanager.TestModelFactory.TASK_STATUS;
-import static ru.michaelshell.taskmanager.TestModelFactory.TASK_TITLE;
-import static ru.michaelshell.taskmanager.TestModelFactory.UPDATED_TASK_DESCRIPTION;
-import static ru.michaelshell.taskmanager.TestModelFactory.UPDATED_TASK_STATUS;
-import static ru.michaelshell.taskmanager.TestModelFactory.UPDATED_TASK_TITLE;
-import static ru.michaelshell.taskmanager.TestModelFactory.USER_ID;
-import static ru.michaelshell.taskmanager.TestModelFactory.getCreateTaskRequest;
-import static ru.michaelshell.taskmanager.TestModelFactory.getTask;
-import static ru.michaelshell.taskmanager.TestModelFactory.getUpdateTaskRequest;
-
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.TASK_DESCRIPTION;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.TASK_ID;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.TASK_STATUS;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.TASK_TITLE;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.UPDATED_TASK_DESCRIPTION;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.UPDATED_TASK_STATUS;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.UPDATED_TASK_TITLE;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.USER_ID;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getCreateTaskRequest;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getTask;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getUpdateTaskRequest;
 
 @ExtendWith({SoftAssertionsExtension.class, MockitoExtension.class})
 class TaskMapperTest {

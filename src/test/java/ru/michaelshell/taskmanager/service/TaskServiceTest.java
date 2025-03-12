@@ -1,12 +1,11 @@
 package ru.michaelshell.taskmanager.service;
 
-import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.michaelshell.taskmanager.TestModelFactory;
+import ru.michaelshell.taskmanager.UnitTestModelFactory;
 import ru.michaelshell.taskmanager.exception.ResourceNotFoundException;
 import ru.michaelshell.taskmanager.kafka.producer.KafkaProducer;
 import ru.michaelshell.taskmanager.mapper.TaskMapper;
@@ -28,14 +27,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static ru.michaelshell.taskmanager.TestModelFactory.TASK_ID;
-import static ru.michaelshell.taskmanager.TestModelFactory.UPDATED_TASK_STATUS;
-import static ru.michaelshell.taskmanager.TestModelFactory.getCreateTaskRequest;
-import static ru.michaelshell.taskmanager.TestModelFactory.getTaskDto;
-import static ru.michaelshell.taskmanager.TestModelFactory.getTaskStatusUpdatedEvent;
-import static ru.michaelshell.taskmanager.TestModelFactory.getUpdateTaskRequest;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.TASK_ID;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.UPDATED_TASK_STATUS;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getCreateTaskRequest;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getTaskDto;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getTaskStatusUpdatedEvent;
+import static ru.michaelshell.taskmanager.UnitTestModelFactory.getUpdateTaskRequest;
 
-@ExtendWith({SoftAssertionsExtension.class, MockitoExtension.class})
+@ExtendWith(MockitoExtension.class)
 class TaskServiceTest {
 
     @Mock
@@ -50,8 +49,8 @@ class TaskServiceTest {
     @Test
     void createTask() {
         CreateTaskRequest createTaskRequest = getCreateTaskRequest();
-        Task taskBeforeSaving = TestModelFactory.getTaskWithoutId();
-        Task savedTask = TestModelFactory.getTask();
+        Task taskBeforeSaving = UnitTestModelFactory.getTaskWithoutId();
+        Task savedTask = UnitTestModelFactory.getTask();
         TaskDto taskDto = getTaskDto();
         when(taskMapper.createTaskRequestToTask(createTaskRequest)).thenReturn(taskBeforeSaving);
         when(taskRepository.save(taskBeforeSaving)).thenReturn(savedTask);
@@ -67,7 +66,7 @@ class TaskServiceTest {
 
     @Test
     void getAllTasks() {
-        Task task = TestModelFactory.getTask();
+        Task task = UnitTestModelFactory.getTask();
         TaskDto taskDto = getTaskDto();
         when(taskRepository.findAll()).thenReturn(List.of(task, task));
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
@@ -83,12 +82,13 @@ class TaskServiceTest {
 
     @Test
     void getTask() {
-        Task task = TestModelFactory.getTask();
+        Task task = UnitTestModelFactory.getTask();
         TaskDto taskDto = getTaskDto();
         when(taskRepository.findById(TASK_ID)).thenReturn(Optional.of(task));
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
         TaskDto result = taskService.getTask(TASK_ID);
+
         assertThat(result).isEqualTo(taskDto);
         verify(taskRepository).findById(any());
         verify(taskMapper).taskToTaskDto(any());
@@ -106,7 +106,7 @@ class TaskServiceTest {
     @Test
     void updateTask_WithNewStatus_ShouldInvokeKafkaProducer() {
         UpdateTaskRequest updateTaskRequest = getUpdateTaskRequest();
-        Task task = TestModelFactory.getTask();
+        Task task = UnitTestModelFactory.getTask();
         TaskDto taskDto = getTaskDto();
         when(taskRepository.findById(TASK_ID)).thenReturn(Optional.of(task));
         doAnswer(invocation -> {
@@ -117,6 +117,7 @@ class TaskServiceTest {
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
         TaskDto result = taskService.updateTask(TASK_ID, updateTaskRequest);
+
         assertThat(result).isEqualTo(taskDto);
         verify(taskRepository).findById(TASK_ID);
         verify(taskMapper).updateTask(task, updateTaskRequest);
@@ -128,12 +129,13 @@ class TaskServiceTest {
     @Test
     void updateTask_WithoutNewStatus_ShouldNotInvokeKafkaProducer() {
         UpdateTaskRequest updateTaskRequest = getUpdateTaskRequest();
-        Task task = TestModelFactory.getTask();
+        Task task = UnitTestModelFactory.getTask();
         TaskDto taskDto = getTaskDto();
         when(taskRepository.findById(TASK_ID)).thenReturn(Optional.of(task));
         when(taskMapper.taskToTaskDto(task)).thenReturn(taskDto);
 
         TaskDto result = taskService.updateTask(TASK_ID, updateTaskRequest);
+
         assertThat(result).isEqualTo(taskDto);
         verify(taskRepository).findById(TASK_ID);
         verify(taskMapper).updateTask(task, updateTaskRequest);
@@ -160,6 +162,7 @@ class TaskServiceTest {
         when(taskRepository.deleteTaskById(TASK_ID)).thenReturn(1);
 
         String result = taskService.deleteTask(TASK_ID);
+
         assertThat(result).isEqualTo("Task has been deleted.");
         verify(taskRepository).deleteTaskById(any());
     }
@@ -169,6 +172,7 @@ class TaskServiceTest {
         when(taskRepository.deleteTaskById(TASK_ID)).thenReturn(0);
 
         String result = taskService.deleteTask(TASK_ID);
+
         assertThat(result).isEqualTo("Task was not found.");
         verify(taskRepository).deleteTaskById(any());
     }

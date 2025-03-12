@@ -21,15 +21,6 @@ public class KafkaProducerConfig {
 
     private final KafkaConfigProperties config;
 
-//    @Bean
-//    NewTopic newTopic() {
-//        return TopicBuilder.name(config.getTopic())
-//                .partitions(config.getNumberOfPartitions())
-//                .replicas(config.getReplicationFactor())
-//                .configs(Map.of("min.insync.replicas", String.valueOf(config.getMinInsyncReplicas())))
-//                .build();
-//    }
-
     @Bean
     public ProducerFactory<String, TaskStatusUpdatedEvent> producerFactory() {
         Map<String, Object> props = new HashMap<>();

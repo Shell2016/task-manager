@@ -7,7 +7,7 @@ import ru.michaelshell.taskmanager.model.dto.UpdateTaskRequest;
 import ru.michaelshell.taskmanager.model.entity.Task;
 import ru.michaelshell.taskmanager.model.event.TaskStatusUpdatedEvent;
 
-public class TestModelFactory {
+public class UnitTestModelFactory {
     public static final long USER_ID = 1L;
     public static final long TASK_ID = 10L;
     public static final String TASK_TITLE = "task title";
