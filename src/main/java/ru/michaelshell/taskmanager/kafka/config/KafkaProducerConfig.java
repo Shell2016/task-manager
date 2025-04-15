@@ -1,12 +1,10 @@
 package ru.michaelshell.taskmanager.kafka.config;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
@@ -22,15 +20,6 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     private final KafkaConfigProperties config;
-
-    @Bean
-    NewTopic newTopic() {
-        return TopicBuilder.name(config.getTopic())
-                .partitions(config.getNumberOfPartitions())
-                .replicas(config.getReplicationFactor())
-                .configs(Map.of("min.insync.replicas", String.valueOf(config.getMinInsyncReplicas())))
-                .build();
-    }
 
     @Bean
     public ProducerFactory<String, TaskStatusUpdatedEvent> producerFactory() {
